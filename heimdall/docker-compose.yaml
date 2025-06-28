@@ -1,0 +1,41 @@
+# Docker Compose file version
+version: "2.1"
+
+# Services section defines the containers to be run
+services:
+  heimdall:
+    # Docker image to be used for the Heimdall container
+    image: lscr.io/linuxserver/heimdall:latest
+
+    # Container name for easy identification
+    container_name: heimdall
+
+    # Environment variables for the container
+    environment:
+      - PUID=1000  # User ID for file ownership
+      - PGID=1000  # Group ID for file ownership
+      - TZ=Europe/Athens  # Timezone setting
+
+    # Mount points for persisting data
+    volumes:
+      - heimdall_config:/config  # Mount a volume for Heimdall configuration
+
+    # Port mappings from host to container
+    ports:
+      - 86:80  # Map host port 86 to container port 80 (HTTP)
+      - 8443:443  # Map host port 8443 to container port 443 (HTTPS)
+
+    # Restart policy for the container
+    restart: unless-stopped  # Restart the container unless stopped manually
+
+# Define an external network named "Apps-Network"
+networks:
+  default:
+    external:
+      name: Apps-Network
+
+# Define an external volume named "heimdall_config"
+volumes:
+  heimdall_config:
+    name: heimdall_config
+    external: true

@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    container_name: uptime-kuma
+    volumes:
+      - uptime_kuma_data:/app/data  # Use the named volume for Uptime Kuma data
+    ports:
+      - "3001:3001"  # Map host port 3001 to container port 3001
+    restart: always  # Always restart the container if it stops unexpectedly
+
+networks:
+  default:
+    external:
+      name: Apps-Network  # Use an external network named "Apps-Network"
+
+volumes:
+  uptime_kuma_data:
+    name: uptime_kuma_data
+    external: true  # Use an external volume for Uptime Kuma data

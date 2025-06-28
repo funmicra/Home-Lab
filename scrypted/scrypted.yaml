@@ -1,0 +1,16 @@
+version: "3.5"
+
+services:
+    scrypted:
+        volumes:
+            - /home/funmicra/Appdate/scrypted/volume:/server/volume
+        container_name: scrypted
+        restart: unless-stopped
+        image: koush/scrypted
+        ports:
+            - 10443:8080
+
+networks:
+  default:
+    external:
+      name: Apps-Network

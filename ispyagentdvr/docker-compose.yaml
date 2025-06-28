@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  ispyagentdvr:
+    image: mekayelanik/ispyagentdvr:latest
+    container_name: ispyagentdvr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Athens
+    volumes:
+      - ispyagentdvr_config:/AgentDVR/Media/XML
+      - ispyagentdvr_recordings:/AgentDVR/Media/WebServerRoot/Media
+      - ispyagentdvr_commands:/AgentDVR/Commands
+    ports:
+      - 8090:8090
+      - 3478:3478/udp
+      - 50000-50010:50000-50010/udp
+    restart: unless-stopped
+
+networks:
+  default:
+    external:
+      name: Apps-Network
+
+volumes:
+  ispyagentdvr_config:  # Define a named volume for config
+    name: ispyagentdvr_config
+    external: true
+  ispyagentdvr_recordings:  # Define a named volume for recordings
+    name: ispyagentdvr_recordings
+    external: true
+  ispyagentdvr_commands:  # Define a named volume for commands
+    name: ispyagentdvr_commands
+    external: true
