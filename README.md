@@ -1,4 +1,4 @@
-# home-lab
+# Home-Lab
 Home lab Documentation
 # 🧪 DevOps Home Lab
 
