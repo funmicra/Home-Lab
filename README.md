@@ -6,7 +6,8 @@ Welcome to my home lab project! This lab simulates real-world infrastructure for
 
 ---
 
-![Home-Lab](https://github.com/user-attachments/assets/ae94db8b-b265-4ea8-9baf-5338f4d50da8)
+![Home-Lab(1)](https://github.com/user-attachments/assets/5f1a3309-7d7d-4f51-9285-9b538a789de1)
+
 
 ---
 
