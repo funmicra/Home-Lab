@@ -19,12 +19,14 @@ Each folder inside `My Docker Stacks/` must contain its own `docker-compose.yaml
 
 This repository includes:
 
-"""
-├── site.yml # Main entrypoint playbook
-├── vars/
-│ └── main.yml # List of compose repos to deploy
-└── roles/
-├── common/ # Basic system packages
-├── docker/ # Docker engine + compose installation
-└── compose_stacks/ # Git clone and compose deploy logic
-"""
+<pre lang="markdown"> <code>
+  This repository includes: 
+  ├── site.yml # Main entrypoint Ansible playbook 
+  ├── vars/ 
+  │ └── main.yml # List of compose repositories to deploy 
+    └── roles/ 
+  ├── common/ # Installs basic system packages and dependencies 
+  ├── docker/ # Installs Docker Engine and Docker Compose 
+    └── compose_stacks/ # Clones Git repositories and deploys Docker Compose stacks
+</code> </pre>
+
