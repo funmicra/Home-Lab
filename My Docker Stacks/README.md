@@ -20,7 +20,6 @@ Each folder inside `My Docker Stacks/` must contain its own `docker-compose.yaml
 This repository includes:
 
 <pre lang="markdown"> <code>
-  This repository includes: 
   ├── site.yml # Main entrypoint Ansible playbook 
   ├── vars/ 
   │ └── main.yml # List of compose repositories to deploy 
