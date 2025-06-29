@@ -6,6 +6,10 @@ Welcome to my home lab project! This lab simulates real-world infrastructure for
 
 ---
 
+![Home-Lab](https://github.com/user-attachments/assets/ae94db8b-b265-4ea8-9baf-5338f4d50da8)
+
+---
+
 ## 🏠 Site A (Home Lab)
 
 ### 🛠️ Hardware
