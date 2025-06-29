@@ -1,0 +1,54 @@
+---
+# playbooks/update_mikrotik.yml
+- name: Upgrade MikroTik RouterOS when a new version is published
+  hosts: mikrotik
+  gather_facts: no
+
+  collections:
+    - community.routeros        # cli modules
+    - ansible.netcommon         # network_cli connection
+
+  vars:
+    # ---- tweakables ---------------------------------------------------------
+    upgrade_channel: stable     # stable | long-term | testing | development
+    reboot_timeout: 480         # seconds to wait for the box to come back up
+    # ------------------------------------------------------------------------
+
+  tasks:
+    - name: Select the desired upgrade channel
+      community.routeros.command:
+        commands:
+          - /system/package/update/set channel={{ upgrade_channel }}
+
+    - name: Check if an update is available
+      community.routeros.command:
+        commands:
+          - /system/package/update/check-for-updates
+      register: update_check
+
+    - name: Parse current and latest RouterOS versions
+      set_fact:
+        current_version: "{{ update_check.stdout[0] | regex_search('current-version: (\\S+)', '\\1') }}"
+        latest_version:  "{{ update_check.stdout[0] | regex_search('latest-version: (\\S+)',  '\\1') }}"
+
+    - name: Show what we found
+      debug:
+        msg: "Current: {{ current_version }} | Available: {{ latest_version | default('none') }}"
+
+    - name: Download + install the new release (RouterOS will auto‑reboot)
+      community.routeros.command:
+        commands:
+          - /system/package/update/install
+      when: latest_version is defined and
+            current_version is version(latest_version, '<')
+
+    - name: Wait for device to finish rebooting
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 22
+        state: started
+        delay: 30            # give it half a minute before we start polling
+        timeout: "{{ reboot_timeout }}"
+      delegate_to: localhost
+      when: latest_version is defined and
+            current_version is version(latest_version, '<')
