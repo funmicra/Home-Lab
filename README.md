@@ -119,7 +119,7 @@ I built it on July 2018 and still improving it..
 
 ## 📌 Future Improvements
 
-- 🔄 Clone all this infrastructure from self-hosted on AWS for clustering and higher availability  
+- 🔄 Clone and migrate this infrastructure from self-hosted on AWS for clustering and higher availability  
 - 📊 Centralized logging with Prometheus + Grafana  
 - 🧪 CI/CD pipelines for infra updates with Jenkins and Git Actions
 - 🧵 GitOps-style Ansible repo with inventory separation  
