@@ -17,12 +17,13 @@ I built it on July 2018 and still improving it..
 ### 🛠️ Hardware
 - **[6U Wall-mounted rack](https://github.com/user-attachments/assets/3c3fb64c-a953-4f3e-bf42-8e76f6c3abe4)** with:
   - **24-port patch panel**
-  - **TP-Link 24-port switch (unmansaged)**
-  - **MikroTik RB4011** as core router and LANs isolator with Fireewall filters
-  - **TP-LINK TL-MR6400** as failover modem solution for zero down time
-  - **5 Wi-Fi access points** managed via **CAPsMAN** (MikroTik)
-  - **PiKVM** for remote troubleshooting my ProxMox server
-- **Dell mini PC** running **Proxmox VE**
+  - **TP-Link 24-port switch (unmanaged)**
+  - **MikroTik RB4011:** as core router and LANs isolator with Fireewall filters
+  - **TP-LINK TL-MR6400:** as failover modem solution for zero down time
+  - **5 Wi-Fi access points:** managed via **CAPsMAN** (MikroTik)
+  - **PiKVM::** for remote troubleshooting my ProxMox server
+  - **CCTV with 5 cameras:** for home security
+- **Dell mini PC:** running **Proxmox VE**
 
 ### 🌐 Network Architecture
 - **Subnet:** `192.168.88.0/25`
@@ -50,6 +51,7 @@ I built it on July 2018 and still improving it..
 ### 🛠️ Hardware
 - **Router:** MikroTik hAP ax²
 - **Three Mikrotik Access Points:** For better customer experience and better devices roaming
+- **CCTV with 8 cameras:** for business security 
 - **Central Pc:** For playing music and other simple office jobs
 - **EFTPOS:** For contactless payments
 - **POS(Point of Sales):** Self hosted on a Raspberry pi 4 with barcode scanner and a tablet as a remote monitor for the sales - [odoo](https://www.odoo.com/app/point-of-sale-shop)
@@ -80,6 +82,7 @@ I built it on July 2018 and still improving it..
 | **Vaultwarden**   | Self-Hosted password manager solution   |  Runs Public with custom cloudflare domain  |
 | **YoutubeDL**  | Application for downloading from YouTube   |  Runs localy  |
 | **Uptime Kuma**  | Monitoring the servises and apps   |  Runs localy  |
+| **AgentDVR**  | Monitoring cctv cameras on both sites   |  Runs localy  |
 | **Clouflare**  | Container for secure tunneling my NextCloud and vaultwarden app with public Domains    |  Runs localy  |
 
 ---
