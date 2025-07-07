@@ -106,7 +106,7 @@ I built it on July 2018 and still improving it..
 
 ## 📌 Future Improvements
 
-- 🔄 Reverse proxy with Traefik or Nginx Proxy Manager  
+- 🔄 Clone all this infrastructure from self-hosted on AWS for clustering and higher availability  
 - 📊 Centralized logging with Prometheus + Grafana  
 - 🧪 CI/CD pipelines for infra updates with Jenkins and Git Actions
 - 🧵 GitOps-style Ansible repo with inventory separation  
