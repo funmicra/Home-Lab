@@ -15,7 +15,8 @@ I built it on July 2018 and still improving it..
 ## 🏠 Site A (Home Lab)
 
 ### 🛠️ Hardware
-- **![6U Wall-mounted rack](https://github.com/user-attachments/assets/3c3fb64c-a953-4f3e-bf42-8e76f6c3abe4)** with:
+- **![6U Wall-mounted rack](https://github.com/user-attachments/assets/3c3fb64c-a953-4f3e-bf42-8e76f6c3abe4)**
+- **6U Wall-mounted rack with:**
   - **24-port patch panel**
   - **TP-Link 24-port switch (unmanaged)**
   - **MikroTik RB4011:** as core router and LANs isolator with Fireewall filters
