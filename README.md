@@ -74,7 +74,7 @@ I built it on July 2018 and still improving it..
 ---
 
 ## 🐳 Docker Services (on Debian VM)
-| Service        | Purpose                            |                                            |
+| Service        | Purpose                            |             Local / Public                               |
 |----------------|------------------------------------|--------------------------------------------|
 | **[Nextcloud](https://black-crab.cc/)**  | Self-hosted cloud storage for me and my family members |  Runs Public with custom cloudflare domain  |
 | **Portainer**  | GUI Docker container management    | Runs localy  |
