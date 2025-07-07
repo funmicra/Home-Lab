@@ -50,7 +50,7 @@ I built it on July 2018 and still improving it..
 ### 🌐 Network Architecture
 - **Subnet:** `192.168.88.128/25`
 - **VLANs:** Guest, Devices, Admin
-- **Connected to Site A** via **Zerotier VPN**
+- **Connected to Site A Admin network** via **Zerotier VPN**
 
 ---
 
