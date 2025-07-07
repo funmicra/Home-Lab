@@ -77,9 +77,8 @@ I built it on July 2018 and still improving it..
 ## ⚙️ Automation & Configuration Management
 
 - **Ansible:**
-  - Playbooks for VM provisioning, user creation, and system configuration
+  - Playbooks for updating, upgrading, provisioning, user creation, and system configuration
   - Docker deployment and container management
-  - Automated patching and update jobs
 
 ---
 
@@ -88,7 +87,7 @@ I built it on July 2018 and still improving it..
 - **CAPsMAN** – centralized AP management with signal tuning
 - **Watchtower** – automatic Docker container updates
 - **OMV** – NAS monitoring and disk health
-- **Uptime checks** – via custom scripts (TBD)
+- **Uptime Kuma** – for monitoring my servises 
 
 ---
 
@@ -96,7 +95,7 @@ I built it on July 2018 and still improving it..
 
 | Category             | Technologies & Tools                               |
 |----------------------|----------------------------------------------------|
-| **DevOps**           | Proxmox, Docker, Ansible, Watchtower               |
+| **DevOps**           | Proxmox, Docker, Ansible, Linux cli, Scripting               |
 | **Networking**       | MikroTik (RouterOS), VLANs, CAPsMAN, ZeroTier      |
 | **System Admin**     | Debian/Ubuntu, Windows, LXC, remote access (SSH)   |
 | **Automation**       | Ansible (YAML), cron jobs, backup scripting        |
@@ -107,10 +106,10 @@ I built it on July 2018 and still improving it..
 ## 📌 Future Improvements
 
 - 🔄 Reverse proxy with Traefik or Nginx Proxy Manager  
-- 📊 Centralized logging with Loki + Grafana  
-- 🧪 CI/CD pipelines for infra updates  
+- 📊 Centralized logging with Prometheus + Grafana  
+- 🧪 CI/CD pipelines for infra updates with Jenkins and Git Actions
 - 🧵 GitOps-style Ansible repo with inventory separation  
-- 🛡️ Implement full backup strategy with Borg + Restic  
+- 🛡️ Implement full backup strategy with ProxMox Backup Server (2nd Device) 
 - 🔐 Add 2FA and secrets management (Vault or SOPS)
 
 ---
