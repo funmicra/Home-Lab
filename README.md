@@ -6,8 +6,8 @@ Welcome to my home lab project! This lab simulates real-world infrastructure for
 I built it on July 2018 and still improving it..
 ---
 
-![Home-Lab(1)](https://github.com/user-attachments/assets/5f1a3309-7d7d-4f51-9285-9b538a789de1)
 
+![Home-Lab](https://github.com/user-attachments/assets/8e7aa7ce-47ca-4bed-83eb-11d782c7b7b4)
 
 ---
 
