@@ -57,8 +57,8 @@ I built it on July 2018 and still improving it..
 ## 🔄 Inter-Site Connectivity
 
 - **Site-to-Site VPN:** [ZeroTier](https://www.zerotier.com/) for seamless L2 connectivity
-- **Remote Access:** SSH over VPN, Tailscale fallback
-- **Backups & Sync:** Local + remote sync planned (BorgBackup + Restic)
+- **Remote Access:** SSH over VPN, WireGuard fallback
+- **Backups & Sync:** Local + remote sync planned (rsync cronjob + OMV cronjobs)
 
 ---
 
@@ -69,6 +69,7 @@ I built it on July 2018 and still improving it..
 | **Portainer**  | GUI Docker container management    |
 | **Watchtower** | Auto-update containers             |
 | **Heimdall**   | Dashboard for accessing services   |
+| **YoutubeDL**  | Application for downlloading from YouTube   |
 
 ---
 
