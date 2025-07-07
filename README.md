@@ -64,14 +64,14 @@ I built it on July 2018 and still improving it..
 ---
 
 ## 🐳 Docker Services (on Debian VM)
-| Service        | Purpose                            |
-|----------------|------------------------------------|
-| **[Nextcloud](https://black-crab.cc/)**  | Self-hosted cloud storage for me and my family members         |
-| **Portainer**  | GUI Docker container management    |
-| **Watchtower** | Auto-update containers             |
-| **Heimdall**   | Dashboard for accessing services   |
-| **YoutubeDL**  | Application for downloading from YouTube   |
-| **Clouflare**  | Container for secure tunneling my NextCloud app with the Domain    |
+| Service        | Purpose                            |                                            |
+|----------------|------------------------------------|--------------------------------------------|
+| **[Nextcloud](https://black-crab.cc/)**  | Self-hosted cloud storage for me and my family members |  Runs Public  |
+| **Portainer**  | GUI Docker container management    | Runs localy  |
+| **Watchtower** | Auto-update containers             |  Runs localy  |
+| **Heimdall**   | Dashboard for accessing services   |  Runs localy  |
+| **YoutubeDL**  | Application for downloading from YouTube   |  Runs localy  |
+| **Clouflare**  | Container for secure tunneling my NextCloud app with the Domain    |  Runs localy  |
 
 ---
 
