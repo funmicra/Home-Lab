@@ -79,7 +79,8 @@ I built it on July 2018 and still improving it..
 | **Heimdall**   | Dashboard for accessing services   |  Runs localy  |
 | **Vaultwarden**   | Self-Hosted password manager solution   |  Runs Public with custom cloudflare domain  |
 | **YoutubeDL**  | Application for downloading from YouTube   |  Runs localy  |
-| **Clouflare**  | Container for secure tunneling my NextCloud app with the Domain    |  Runs localy  |
+| **Uptime Kuma**  | Monitoring the servises and apps   |  Runs localy  |
+| **Clouflare**  | Container for secure tunneling my NextCloud and vaultwarden app with public Domains    |  Runs localy  |
 
 ---
 
