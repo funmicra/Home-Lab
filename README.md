@@ -38,7 +38,7 @@ I built it on July 2018 and still improving it..
 |----------------|----------------------------------------|----------------|
 | `debian-docker - Production Server` | Docker host (Nextcloud, Portainer, Heimdall, Watchtower) | Debian         |
 | `debian-docker - Testing Server` | Docker host (Testing various applications and microservises before they migrate to production server) | Debian         |
-| `openmediavault` | NAS with SMB shares and scheduled backups | OMV            |
+| `openmediavault` | NAS with SMB and NFS shares and scheduled backups | OMV            |
 | `kali-vm`       | Pentesting and security experiments   | Kali Linux     |
 | `windows10-vm`  | Testing & Windows-based services      | Windows 10     |
 | `adguard-lxc`   | Local DNS filtering                   | LXC (Debian)   |
