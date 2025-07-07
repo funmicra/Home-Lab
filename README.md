@@ -63,7 +63,7 @@ Welcome to my home lab project! This lab simulates real-world infrastructure for
 ## 🐳 Docker Services (on Debian VM)
 | Service        | Purpose                            |
 |----------------|------------------------------------|
-| **Nextcloud**  | Self-hosted cloud storage          |
+| **[Nextcloud](https://black-crab.cc/)**  | Self-hosted cloud storage          |
 | **Portainer**  | GUI Docker container management    |
 | **Watchtower** | Auto-update containers             |
 | **Heimdall**   | Dashboard for accessing services   |
