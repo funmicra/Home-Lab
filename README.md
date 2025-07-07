@@ -69,7 +69,8 @@ I built it on July 2018 and still improving it..
 | **Portainer**  | GUI Docker container management    |
 | **Watchtower** | Auto-update containers             |
 | **Heimdall**   | Dashboard for accessing services   |
-| **YoutubeDL**  | Application for downlloading from YouTube   |
+| **YoutubeDL**  | Application for downloading from YouTube   |
+| **Clouflare**  | Container for secure tunneling my NextCloud app with the Domain    |
 
 ---
 
