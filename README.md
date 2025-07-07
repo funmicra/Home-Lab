@@ -28,6 +28,7 @@ I built it on July 2018 and still improving it..
   - `Guest` – limited internet-only access
   - `Smart Devices` – isolated IoT environment
   - `Admin` – full-access trusted LAN
+  - `Repairments` – Isolated LAN for devices that i repair
 - **DNS Filtering:** [AdGuard Home](https://github.com/AdguardTeam/AdGuardHome) (LXC container)
 
 ### 💻 Virtualization with Proxmox
