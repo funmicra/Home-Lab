@@ -49,6 +49,11 @@ I built it on July 2018 and still improving it..
 
 ### 🛠️ Hardware
 - **Router:** MikroTik hAP ax²
+- **Three Mikrotik Access Points** For better customer experience and better devices roaming
+- **Central Pc** For playing music and other simple office jobs
+- **EFTPOS** For contactless payments
+- **POS(Point of Sales)** Self hosted on a Raspberry pi 4 with barcode scanner and a tablet as a remote monitor for the sales [odoo](https://www.odoo.com/app/point-of-sale-shop)
+- **Cashier Mashine**
 
 ### 🌐 Network Architecture
 - **Subnet:** `192.168.88.128/25`
