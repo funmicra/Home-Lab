@@ -132,6 +132,7 @@ I built it on July 2018 and still improving it..
 
 I'm passionate about learning DevOps and systems engineering through real-world experimentation. This home lab has been instrumental in building my skills and confidence, and I’m always evolving it as I explore new technologies.
 
-If you’d like to connect or collaborate, feel free to reach out![e-mail](el.funmicra@gmail.com)
+If you’d like to connect or collaborate, feel free to reach out! 
+[e-mail](el.funmicra@gmail.com)
 
 ---
