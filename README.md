@@ -66,7 +66,7 @@ I built it on July 2018 and still improving it..
 ## 🐳 Docker Services (on Debian VM)
 | Service        | Purpose                            |
 |----------------|------------------------------------|
-| **[Nextcloud](https://black-crab.cc/)**  | Self-hosted cloud storage          |
+| **[Nextcloud](https://black-crab.cc/)**  | Self-hosted cloud storage for me and my family members         |
 | **Portainer**  | GUI Docker container management    |
 | **Watchtower** | Auto-update containers             |
 | **Heimdall**   | Dashboard for accessing services   |
