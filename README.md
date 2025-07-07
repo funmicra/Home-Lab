@@ -37,10 +37,8 @@ I built it on July 2018 and still improving it..
 ### 💻 Virtualization with Proxmox
 | VM / Container | Role                                  | OS             |
 |----------------|----------------------------------------|----------------|
-| `debian-docker  
-Production Server` | Docker host (Nextcloud, Portainer, Heimdall, Watchtower) | Debian         |
-| `debian-docker  
-Testing Server` | Docker host (Testing various applications and microservises before they migrate to production server) | Debian         |
+| `debian-docker Production Server` | Docker host (Nextcloud, Portainer, Heimdall, Watchtower) | Debian         |
+| `debian-docker Testing Server` | Docker host (Testing various applications and microservises before they migrate to production server) | Debian         |
 | `openmediavault` | NAS with SMB and NFS shares and scheduled backups | OMV            |
 | `kali-vm`       | Pentesting and security experiments   | Kali Linux     |
 | `windows10-vm`  | Testing & Windows-based services      | Windows 10     |
