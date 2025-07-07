@@ -21,7 +21,7 @@ I built it on July 2018 and still improving it..
   - **MikroTik RB4011** as core router and LANs isolator with Fireewall filters
   - **TP-LINK TL-MR6400** as failover modem solution for zero down time
   - **5 Wi-Fi access points** managed via **CAPsMAN** (MikroTik)
-  - **PI-KVM** for remote troubleshooting my ProxMox server
+  - **PiKVM** for remote troubleshooting my ProxMox server
 - **Dell mini PC** running **Proxmox VE**
 
 ### 🌐 Network Architecture
