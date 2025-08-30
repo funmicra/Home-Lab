@@ -2,7 +2,7 @@
 
 This repository contains an Ansible setup to automatically deploy all Docker Compose stacks from the [`funmicra/Home-Lab`](https://github.com/funmicra/Home-Lab) GitHub repository.
 
-## 📦 What It Does
+## 📦 What It Does / How It Runs
 
 This playbook will:
 
@@ -12,6 +12,17 @@ This playbook will:
 4. **Run `docker compose up`** for each valid compose project folder found.
 
 Each folder inside `My Docker Stacks/` must contain its own `docker-compose.yaml` (or `.yml`) file.
+
+**Since file site.yml is the entry-point playbook, the basic command is:**
+```bash
+ansible-playbook -i hosts.ini site.yml -v --diff --ask-become-pass
+```
+💡 flags:
+- -i hosts.ini → points to your inventory.
+- --ask-become-pass → prompts for sudo password if needed.
+- -v → verbose output
+- -C → check mode (dry-run)
+- --diff → shows what would change
 
 ---
 
