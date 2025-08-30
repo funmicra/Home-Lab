@@ -1,0 +1,11 @@
+[Unit]
+Description=Date Printer Service
+After=network.target
+
+[Service]
+ExecStart=/home/USERNAME/linux-lab/scripts/date-printer.sh
+Restart=always
+User=USERNAME
+
+[Install]
+WantedBy=multi-user.target
