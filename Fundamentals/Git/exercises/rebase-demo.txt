@@ -1,0 +1,5 @@
+git checkout feature/login
+git rebase main
+# resolve conflicts
+git rebase --continue
+

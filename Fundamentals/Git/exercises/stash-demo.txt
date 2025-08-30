@@ -1,0 +1,4 @@
+# Save uncommitted changes
+git stash
+# Do other work
+git stash pop
