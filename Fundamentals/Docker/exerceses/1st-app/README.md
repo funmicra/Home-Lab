@@ -18,7 +18,7 @@ docker images
 
 You should see my-wordpress and my-mysql in the list.
 
-## 3️⃣ Start the full stack with Docker-Compose
+## 3️⃣ Start the full stack with "docker-compose"
 
 ```bash
 # Start containers in detached mode
