@@ -19,7 +19,7 @@
 # ──────────────────────────────────────────────
 
 - name: Ensure base CLI utilities are installed
-  ansible.builtin.apt:
+  ansible.builtin.package:
     name:
       - vim
       - curl
@@ -34,12 +34,13 @@
 # ──────────────────────────────────────────────
 
 - name: Install Docker Engine and docker‑compose‑plugin
-  ansible.builtin.apt:
+  ansible.builtin.package:
     name:
       - docker.io
       - docker-compose-plugin     # modern Compose v2 binary
     state: present
     update_cache: true
+    autoremove: true
 
 - name: Enable and start Docker service
   ansible.builtin.systemd:
@@ -47,6 +48,16 @@
     enabled: true
     state: started
 
+- name: Ensure docker group exists
+  ansible.builtin.group:
+    name: docker
+    state: present
+
+- name: Add users to docker group
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"   # Or specify another username
+    groups: docker
+    append: true
 
 # ──────────────────────────────────────────────
 # roles/compose_stacks/tasks/main.yml — Clone repo & deploy **all** compose files
@@ -92,6 +103,7 @@
   community.docker.docker_compose:
     project_src: "{{ item }}"
     state: present
+    pull: true
     restarted: true
   loop: "{{ project_dirs }}"
   loop_control:
