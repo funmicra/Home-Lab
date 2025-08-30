@@ -11,7 +11,7 @@ docker --version
 
 ## Check Docker Compose version
 ```bash
-docker compose version
+docker-compose version
 ```
 
 ## Show detailed system-wide info (containers, images, storage, etc.)
@@ -195,41 +195,41 @@ docker network prune
 docker system prune -a --volumes
 ```
 
-## 7. Docker Compose
+## 7. Docker-Compose
 
 ## Start services in detached mode
 ```bash
-docker compose up -d
+docker-compose up -d
 ```
 
 ## Start services in foreground mode (logs)
 ```bash
-docker compose up
+docker-compose up
 ```
 
 ## Stop services
 ```bash
-docker compose down
+docker-compose down
 ```
 
 ## Build/rebuild services
 ```bash
-docker compose build
+docker-compose build
 ```
 
 ## List running Compose services
 ```bash
-docker compose ps
+docker-compose ps
 ```
 
 ## View logs for services
 ```bash
-docker compose logs -f
+docker-compose logs -f
 ```
 
 ## Run a one-off command in a service
 ```bash
-docker compose run --rm service_name bash
+docker-compose run --rm service_name bash
 ```
 
 ## 8. Inspect & Debug
@@ -264,6 +264,7 @@ docker cp /host/path my-container:/path/in/container
 - Use .dockerignore to exclude files from build context
 - Tag images clearly (versioning)
 - Use named volumes for persistent data
+
 
 
 
