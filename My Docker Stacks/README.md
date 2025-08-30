@@ -24,19 +24,23 @@ ansible-playbook -i hosts.ini site.yml -v --diff --ask-become-pass
 - -C → check mode (dry-run)
 - --diff → shows what would change
 
+🖥️ hosts.ini
+```ini
+[homelab]
+# Replace with your host IP or hostname
+192.168.88.YX
+       .
+       .
+192.168.88.XY
+
+[homelab:vars]
+ansible_user=your_ssh_user         # SSH username
+ansible_port=22                     # SSH port (default 22)
+ansible_ssh_private_key_file=/path/to/private_key  # Path to your SSH key
+ansible_become=true                 # Enable privilege escalation (sudo)
+ansible_become_method=sudo
+ansible_become_password=YOUR_SUDO_PASSWORD       # Optional, if sudo needs a password
+ansible_python_interpreter=/usr/bin/python3      # Ensure Python 3 is used
+```
 ---
-
-## 🗂 Project Structure
-
-This repository includes:
-
-<pre lang="markdown"> <code>
-  ├── site.yml # Main entrypoint Ansible playbook 
-  ├── vars/ 
-  │ └── main.yml # List of compose repositories to deploy 
-    └── roles/ 
-  ├── common/ # Installs basic system packages and dependencies 
-  ├── docker/ # Installs Docker Engine and Docker Compose 
-    └── compose_stacks/ # Clones Git repositories and deploys Docker Compose stacks
-</code> </pre>
 
