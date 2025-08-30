@@ -8,10 +8,10 @@ This playbook will:
 
 1. **Install Docker Engine** and the `docker-compose` plugin (Compose v2).
 2. **Clone the `Home-Lab` repo** from GitHub.
-3. **Recursively search** the `My Docker Stacks/` subdirectory for any `docker-compose*.yaml` files.
+3. **Recursively search** the `compose-projects/` subdirectory for any `docker-compose*.yaml` files.
 4. **Run `docker compose up`** for each valid compose project folder found.
 
-Each folder inside `My Docker Stacks/` must contain its own `docker-compose.yaml` (or `.yml`) file.
+Each folder inside `compose-projects/` must contain its own `docker-compose.yaml` (or `.yml`) file.
 
 **Since file site.yml is the entry-point playbook, the basic command is:**
 ```bash
@@ -40,17 +40,3 @@ ansible_become_password=YOUR_SUDO_PASSWORD       # Optional, if sudo needs a pas
 ansible_python_interpreter=/usr/bin/python3      # Ensure Python 3 is used
 ```
 ---
-**🧩 Project Folders/Files Structure**
-```bash
-
-├── group_vars/               # Variables per host group
-│   └── homelab.yml
-├── host_vars/                # Variables per host
-│   └── homelab1.yml
-├── roles/
-│   ├── monitoring/           # Future role for Prometheus/Grafana etc.
-│   ├── backups/              # Backup automation
-│   └── security/             # Optional security hardening role
-├── logs/                     # Capture ansible run logs
-├── scripts/                  # Helper scripts (cleanup, restart stacks)
-```
