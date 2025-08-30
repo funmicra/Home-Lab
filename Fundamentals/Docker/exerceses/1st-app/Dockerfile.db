@@ -1,0 +1,11 @@
+# Use official MySQL image
+FROM mysql:8.0
+
+# Expose MySQL port
+EXPOSE 3306
+
+# Environment variables will be passed at runtime (from .env or docker-compose)
+ENV MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+ENV MYSQL_DATABASE=${MYSQL_DATABASE}
+ENV MYSQL_USER=${MYSQL_USER}
+ENV MYSQL_PASSWORD=${MYSQL_PASSWORD}
