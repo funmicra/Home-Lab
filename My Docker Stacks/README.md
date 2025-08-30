@@ -1,6 +1,6 @@
 # 🏠 Home Lab Ansible Deployment
 
-This repository contains an Ansible setup to automatically deploy all Docker Compose stacks from the [`funmicra/Home-Lab`](https://github.com/funmicra/Home-Lab) GitHub repository.
+This repository contains an Ansible setup to automatically deploy all Docker Compose stacks from the [`funmicra/Home-Lab`](https://github.com/funmicra/Home-Lab) GitHub repository to my ProxMox VM server on 192.168.88.10.
 
 ## 📦 What It Does / How It Runs
 
@@ -28,10 +28,7 @@ ansible-playbook -i hosts.ini site.yml -v --diff --ask-become-pass
 ```ini
 [homelab]
 # Replace with your host IP or hostname
-192.168.88.YX
-       .
-       .
-192.168.88.XY
+192.168.88.10
 
 [homelab:vars]
 ansible_user=your_ssh_user         # SSH username
