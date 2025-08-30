@@ -76,7 +76,11 @@ I built it on July 2018 and still improving it..
 ---
 
 ## 🐳 Docker Services (on Debian VM)
-| Service        | Purpose                            |             Local / Public                               |
+<img width="1918" height="880" alt="Screenshot from 2025-08-30 15-47-06" src="https://github.com/user-attachments/assets/6872ed22-f54c-400d-a02f-933b2f20a580" />
+<img width="1918" height="880" alt="Screenshot from 2025-08-30 15-47-27" src="https://github.com/user-attachments/assets/f57005ee-b527-4b6c-8387-66103fcee155" />
+<img width="1918" height="880" alt="Screenshot from 2025-08-30 15-47-42" src="https://github.com/user-attachments/assets/03a75ced-345f-4f6d-a3b8-55bf805b6d93" />
+
+|Service        | Purpose                            |             Local / Public                               |
 |----------------|------------------------------------|--------------------------------------------|
 | **[Nextcloud](https://black-crab.cc/)**  | Self-hosted cloud storage for me and my family members |  Runs Public with custom cloudflare domain  |
 | **Portainer**  | GUI Docker container management    | Runs localy  |
