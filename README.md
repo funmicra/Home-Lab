@@ -1,6 +1,6 @@
 # My DevOps Home-Lab / Syndicate
 Home lab Documentation
-# 🧪 DevOps Home Lab
+# 🧪 The Lab
 
 Welcome to my home lab project! This lab simulates real-world infrastructure for hands-on learning and experimentation in DevOps, system administration, networking, and automation.
 
