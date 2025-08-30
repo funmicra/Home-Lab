@@ -36,6 +36,8 @@ I built it on July 2018 and still improving it..
 - **DNS Filtering:** [AdGuard Home](https://github.com/AdguardTeam/AdGuardHome) (LXC container)
 
 ### 💻 Virtualization with Proxmox
+<img width="1918" height="880" alt="Screenshot from 2025-08-30 15-45-14" src="https://github.com/user-attachments/assets/a7840bcf-89d6-4d06-8d3e-015ea9d8f23a" />
+
 | VM / Container | Role                                  | OS             |
 |----------------|----------------------------------------|----------------|
 | `debian-docker Production Server` | Docker host (Nextcloud, Portainer, Heimdall, Watchtower) | Debian         |
