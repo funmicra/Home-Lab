@@ -1,4 +1,4 @@
-## Git 🔧
+## Git Fundamentals 🔧
 
 ## Deep Dive into Git
 
