@@ -1,6 +1,6 @@
-# ===============================
-# Docker Cheatsheet
-# ===============================
+## ===============================
+## Docker Cheatsheet
+## ===============================
 
 # -------------------------------
 # 1. Docker Version & Info
@@ -186,3 +186,4 @@ docker cp /host/path my-container:/path/in/container
 # Use .dockerignore to exclude files from build context
 # Tag images clearly (versioning)
 # Use named volumes for persistent data
+
