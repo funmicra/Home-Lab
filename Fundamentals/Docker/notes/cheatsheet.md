@@ -2,18 +2,24 @@
 ## Docker Cheatsheet
 ## ===============================
 
-# -------------------------------
-# 1. Docker Version & Info
-# -------------------------------
+## -------------------------------
+## 1. Docker Version & Info
+## -------------------------------
 
-# Check Docker version
+## Check Docker version
+```bash
 docker --version
+```
 
-# Check Docker Compose version
+## Check Docker Compose version
+```bash
 docker compose version
+```
 
-# Show detailed system-wide info (containers, images, storage, etc.)
+## Show detailed system-wide info (containers, images, storage, etc.)
+```bash
 docker info
+```
 
 # -------------------------------
 # 2. Working with Images
@@ -186,4 +192,5 @@ docker cp /host/path my-container:/path/in/container
 # Use .dockerignore to exclude files from build context
 # Tag images clearly (versioning)
 # Use named volumes for persistent data
+
 
