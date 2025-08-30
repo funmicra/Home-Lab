@@ -1,9 +1,18 @@
 # My DevOps Home-Lab / Syndicate
 Home lab Documentation
+## ✍️ About Me
+
+I'm passionate about learning DevOps and systems engineering through real-world experimentation. This home lab has been instrumental in building my skills and confidence, and I’m always evolving it as I explore new technologies.
+
+If you’d like to connect or collaborate, feel free to reach out! 
+[e-mail](el.funmicra@gmail.com)
+
+---
 # 🧪 The Lab
 
 Welcome to my home lab project! This lab simulates real-world infrastructure for hands-on learning and experimentation in DevOps, system administration, networking, and automation.
 
+---
 
 I built it on July 2018 and still improving it..
 ---
@@ -134,11 +143,4 @@ I built it on July 2018 and still improving it..
 
 ---
 
-## ✍️ About Me
 
-I'm passionate about learning DevOps and systems engineering through real-world experimentation. This home lab has been instrumental in building my skills and confidence, and I’m always evolving it as I explore new technologies.
-
-If you’d like to connect or collaborate, feel free to reach out! 
-[e-mail](el.funmicra@gmail.com)
-
----
