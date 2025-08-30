@@ -1,6 +1,6 @@
-## Git Fundamentals 🔧
-
-## Deep Dive into Git
+## 🔧 Git Fundamentals 
+## Objectives:
+   - Deep Dive into Git
 
 ## Focus areas:
 
