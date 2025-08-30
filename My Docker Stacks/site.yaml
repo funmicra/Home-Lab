@@ -118,7 +118,7 @@ compose_stacks:
   - name: home-lab
     repo: https://github.com/funmicra/Home-Lab.git
     version: main
-    compose_subdir: "My Docker Stacks"   # path inside repo containing compose projects
+    compose_subdir: "compose-projects"   # path inside repo containing compose projects
 
 # Nothing else to edit — playbook auto‑discovers every docker‑compose*.yml
 # under "My Docker Stacks/" (recursively) and deploys each one.
