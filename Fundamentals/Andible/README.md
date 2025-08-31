@@ -19,5 +19,6 @@ Ansible-Playbooks/
 └── .gitignore                 # Git ignore file
 ```
 
-## [Ansible Commands Cheatsheet](https://github.com/funmicra/Home-Lab/blob/master/Fundamentals/Andible/cheatsheet.md)
+## ⚙️ [Ansible Commands Cheatsheet](https://github.com/funmicra/Home-Lab/blob/master/Fundamentals/Andible/cheatsheet.md)
+
 
