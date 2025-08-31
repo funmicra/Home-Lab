@@ -8,7 +8,7 @@ This playbook will:
 
 1. **Install Docker Engine** and the `docker-compose` plugin (Compose v2).
 2. **Clone the `Home-Lab` repo** from GitHub.
-3. **Recursively search** the `compose-projects/` subdirectory for any `docker-compose*.yaml` files.
+3. **Recursively search** the `compose-projects/` subdirectory for any `docker-compose.yaml` files.
 4. **Run `docker compose up`** for each valid compose project folder found.
 
 Each folder inside `compose-projects/` must contain its own `docker-compose.yaml` (or `.yml`) file.
