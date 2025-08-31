@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+
+  mysql:
+    restart: unless-stopped
+    image: mysql:8.0
+    hostname: mysql
+    volumes:
+      - semaphore-mysql:/var/lib/mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: ${MYSQL_RANDOM_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - Apps-Network
+
+  semaphore:
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    image: semaphoreui/semaphore:latest
+    environment:
+      SEMAPHORE_DB_USER: ${SEMAPHORE_DB_USER}
+      SEMAPHORE_DB_PASS: ${SEMAPHORE_DB_PASS}
+      SEMAPHORE_DB_HOST: mysql
+      SEMAPHORE_DB_PORT: 3306
+      SEMAPHORE_DB_DIALECT: mysql
+      SEMAPHORE_DB: ${SEMAPHORE_DB}
+      SEMAPHORE_PLAYBOOK_PATH: /tmp/semaphore/
+      SEMAPHORE_ADMIN_PASSWORD: ${SEMAPHORE_ADMIN_PASSWORD}
+      SEMAPHORE_ADMIN_NAME: ${SEMAPHORE_ADMIN_NAME}
+      SEMAPHORE_ADMIN_EMAIL: ${SEMAPHORE_ADMIN_EMAIL}
+      SEMAPHORE_ADMIN: ${SEMAPHORE_ADMIN}
+      SEMAPHORE_ACCESS_KEY_ENCRYPTION: ${SEMAPHORE_ACCESS_KEY_ENCRYPTION}
+      SEMAPHORE_LDAP_ACTIVATED: ${SEMAPHORE_LDAP_ACTIVATED}
+#      SEMAPHORE_LDAP_HOST: ${SEMAPHORE_LDAP_HOST}
+#      SEMAPHORE_LDAP_PORT: ${SEMAPHORE_LDAP_PORT}
+#      SEMAPHORE_LDAP_NEEDTLS: ${SEMAPHORE_LDAP_NEEDTLS}
+#      SEMAPHORE_LDAP_DN_BIND: ${SEMAPHORE_LDAP_DN_BIND}
+#      SEMAPHORE_LDAP_PASSWORD: ${SEMAPHORE_LDAP_PASSWORD}
+#      SEMAPHORE_LDAP_DN_SEARCH: ${SEMAPHORE_LDAP_DN_SEARCH}
+#      SEMAPHORE_LDAP_SEARCH_FILTER: ${SEMAPHORE_LDAP_SEARCH_FILTER}
+    networks:
+      - Apps-Network
+
+networks:
+  Apps-Network:
+    external: true
+    name: Apps-Network
+
+volumes:
+  semaphore-mysql:
+     name: semaphore-mysql

@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+    portainer-ce:
+        ports:
+            - 8000:8000  # Map host port 8000 to container port 8000
+            - 9443:9443  # Map host port 9443 to container port 9443
+        container_name: portainer  # Set the name of the container to "portainer"
+        restart: unless-stopped  # Restart the container unless stopped manually
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock  # Mount Docker socket for container to access host's Docker daemon
+            - portainer_data:/data  # Mount a volume named "portainer_data" to /data in the container
+        image: portainer/portainer-ce:latest  # Use the latest Portainer CE image
+
+volumes:
+    portainer_data:
+        external: true  # Use an external volume named "portainer_data"
+
+networks:
+  default:
+    external:
+      name: Apps-Network  # Use an external network named "Apps-Network"

@@ -1,0 +1,27 @@
+---
+version: "2.1"
+services:
+  code-server:
+    image: lscr.io/linuxserver/code-server:latest
+    container_name: code-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Athens
+      - PASSWORD=${PASSWORD}
+      - SUDO_PASSWORD=${SUDO_PASSWORD}
+      - DEFAULT_WORKSPACE=${DEFAULT_WORKSPACE}
+    volumes:
+      - code-server:/config
+    ports:
+      - 2443:8443
+    restart: unless-stopped
+
+volumes:
+   code-server:
+      name: code-server
+      
+networks:
+  default:
+    external:
+      name: Apps-Network
