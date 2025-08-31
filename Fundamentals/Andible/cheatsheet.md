@@ -1,4 +1,4 @@
-# Ansible Commands Cheatsheet
+# 💻🛠️ Ansible Commands Cheatsheet
 
 ## Inventory
 ```bash
@@ -98,3 +98,4 @@ ansible -i inventory_ec2.yml all -m ping
 
 ---
 ✅ Pro tip: Use `--check --diff` together to preview changes without applying them.
+
