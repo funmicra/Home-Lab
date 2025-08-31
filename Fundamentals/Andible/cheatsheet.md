@@ -17,11 +17,69 @@ ansible all -i inventory.ini -m shell -a "uptime"
 # Copy file
 ansible all -m copy -a "src=/local/file dest=/remote/path"
 
+
+# Fetch file from remote
+ansible all -m fetch -a "src=/remote/file dest=/local/dir flat=yes"
+
+
 # Install package (Debian/Ubuntu)
 ansible all -m apt -a "name=htop state=present" --become
 
+
+# Remove package
+ansible all -m apt -a "name=apache2 state=absent" --become
+
+
 # Install package (RHEL/CentOS)
 ansible all -m yum -a "name=htop state=present" --become
+
+
+# Restart service
+ansible all -m service -a "name=nginx state=restarted" --become
+
+
+# Ensure service is enabled and running
+ansible all -m service -a "name=sshd state=started enabled=yes" --become
+
+
+# Create user
+ansible all -m user -a "name=deploy state=present shell=/bin/bash" --become
+
+
+# Add user to group
+ansible all -m user -a "name=deploy groups=sudo append=yes" --become
+
+
+# Manage file permissions
+ansible all -m file -a "path=/remote/file mode=0644 owner=root group=root" --become
+
+
+# Create directory
+ansible all -m file -a "path=/opt/myapp state=directory mode=0755" --become
+
+
+# Download file with get_url
+ansible all -m get_url -a "url=https://example.com/file.tar.gz dest=/tmp/file.tar.gz"
+
+
+# Unarchive file
+ansible all -m unarchive -a "src=/tmp/file.tar.gz dest=/opt/myapp remote_src=yes" --become
+
+
+# Run command with arguments
+ansible all -m command -a "df -h"
+
+
+# Run arbitrary shell command
+ansible all -m shell -a "tail -n 100 /var/log/syslog"
+
+
+# Check available updates (Debian/Ubuntu)
+ansible all -m apt -a "upgrade=dist update_cache=yes" --become
+
+
+# Reboot servers
+ansible all -m reboot --become
 ```
 
 ## Playbooks
@@ -98,4 +156,5 @@ ansible -i inventory_ec2.yml all -m ping
 
 ---
 ✅ Pro tip: Use `--check --diff` together to preview changes without applying them.
+
 
