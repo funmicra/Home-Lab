@@ -1,0 +1,13 @@
+---
+- hosts: test
+  user: root
+  tasks:
+  - name: Create users "ansible" on remote hosts
+    ansible.builtin.user:
+      name: ansible
+      password: password
+      append: yes
+      groups: sudo
+      shell: /bin/bash
+      state: present
+ 

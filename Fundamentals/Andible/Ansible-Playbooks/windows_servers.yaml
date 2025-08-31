@@ -1,0 +1,15 @@
+---
+- name: Check for Windows updates
+  hosts: 192.168.88.115
+  gather_facts: no  # You can set this to yes if you want to gather facts about the hosts
+
+  tasks:
+    - name: List available updates
+      win_updates:
+        state: search
+      register: update_result
+
+    - name: Show available updates
+      debug:
+        var: update_result
+

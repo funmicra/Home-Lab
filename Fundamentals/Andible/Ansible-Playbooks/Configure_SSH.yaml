@@ -1,0 +1,18 @@
+---
+- name: Copy SSH Configuration File
+  hosts: 192.168.88.29  # Replace with the name of the host group or server(s) you want to target
+  become: yes  # To run tasks with sudo privileges
+
+  tasks:
+    - name: Copy SSH configuration file
+      copy:
+        src: sshd_config  # Replace with the path to your local SSH client configuration file
+        dest: /etc/ssh/sshd_config  # The destination path for the configuration file
+        remote_src: no
+      notify: Restart SSH Service
+
+  handlers:
+    - name: Restart SSH Service
+      service:
+        name: ssh
+        state: restarted
