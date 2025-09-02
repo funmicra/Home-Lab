@@ -1,0 +1,99 @@
+---
+- name: Update MikroTik RouterOS devices
+  hosts: MikroTik
+  gather_facts: false
+  connection: network_cli
+  vars:
+    ansible_network_os: routeros
+    ansible_user: funmicra
+    # Set this to true only when you're ready to reboot
+    auto_reboot: false
+    # Backup before update
+    create_backup: true
+    
+  tasks:
+    - name: Gather RouterOS facts
+      community.routeros.facts:
+      register: routeros_facts
+
+    - name: Display current RouterOS version
+      debug:
+        msg: "Current RouterOS version: {{ ansible_net_version }}"
+
+    - name: Create backup before update
+      community.routeros.command:
+        commands:
+          - /system backup save name=pre-update-backup
+      when: create_backup
+
+    - name: Check for available updates
+      community.routeros.command:
+        commands:
+          - /system package update check-for-updates
+      register: update_check
+
+    - name: Display update check results
+      debug:
+        var: update_check.stdout
+
+    - name: Download available updates
+      community.routeros.command:
+        commands:
+          - /system package update download
+      register: download_result
+      when: "'new version available' in update_check.stdout[0] | lower"
+
+    - name: Wait for download to complete
+      pause:
+        seconds: 30
+      when: download_result is not skipped
+
+    - name: Check download status
+      community.routeros.command:
+        commands:
+          - /system package update print
+      register: download_status
+      when: download_result is not skipped
+
+    - name: Display download status
+      debug:
+        var: download_status.stdout
+      when: download_result is not skipped
+
+    - name: Install updates (requires reboot)
+      community.routeros.command:
+        commands:
+          - /system package update install
+      when: 
+        - download_result is not skipped
+        - auto_reboot
+      register: install_result
+
+    - name: Manual intervention required
+      debug:
+        msg: |
+          Updates are downloaded and ready to install.
+          Set 'auto_reboot: true' in the playbook and run again to install updates.
+          WARNING: This will reboot the device!
+          
+          To install manually via CLI:
+          /system package update install
+      when: 
+        - download_result is not skipped
+        - not auto_reboot
+
+    - name: Wait for device to come back online after reboot
+      wait_for_connection:
+        delay: 60
+        timeout: 300
+      when: install_result is defined
+
+    - name: Verify new version after update
+      community.routeros.facts:
+      register: updated_facts
+      when: install_result is defined
+
+    - name: Display new RouterOS version
+      debug:
+        msg: "Updated RouterOS version: {{ ansible_net_version }}"
+      when: install_result is defined

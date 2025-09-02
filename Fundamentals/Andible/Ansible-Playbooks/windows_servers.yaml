@@ -1,15 +1,68 @@
 ---
 - name: Check for Windows updates
-  hosts: 192.168.88.115
-  gather_facts: no  # You can set this to yes if you want to gather facts about the hosts
-
+  hosts: Windows
+  gather_facts: no
+  vars:
+    # Uncomment and configure these if needed
+    # ansible_user: "{{ windows_user }}"
+    # ansible_password: "{{ windows_password }}"
+    # ansible_connection: winrm
+    # ansible_winrm_transport: ntlm
   tasks:
-    - name: List available updates
+    - name: Search for available Windows updates
       win_updates:
-        state: search
+        state: searched
+        category_names:
+          - SecurityUpdates
+          - CriticalUpdates
+          - UpdateRollups
+          - Updates
       register: update_result
+      ignore_errors: yes
 
-    - name: Show available updates
+    - name: Debug raw updates structure (for troubleshooting)
       debug:
-        var: update_result
+        var: update_result.updates
+      when: 
+        - update_result is defined
+        - update_result.updates is defined
 
+    - name: Display update search results
+      debug:
+        msg: |
+          Update Search Results:
+          - Total updates found: {{ update_result.found_update_count | default(0) }}
+          - Reboot required: {{ update_result.reboot_required | default(false) }}
+          - Search completed: {{ update_result.changed | default(false) }}
+      when: update_result is defined
+
+    - name: List individual updates (if any found)
+      debug:
+        msg: |
+          Update: {{ item.title | default(item.name | default('Unknown')) }}
+          Size: {{ item.size | default(0) | filesizeformat }}
+          Severity: {{ item.severity | default('N/A') }}
+          Categories: {{ item.categories | default([]) | join(', ') }}
+          KB: {{ item.kb | default('N/A') }}
+          ---
+      loop: "{{ update_result.updates.values() | list }}"
+      when: 
+        - update_result is defined
+        - update_result.updates is defined
+        - update_result.updates | length > 0
+
+    - name: Show message when no updates found
+      debug:
+        msg: "No updates available for this Windows system."
+      when: 
+        - update_result is defined
+        - update_result.found_update_count is defined
+        - update_result.found_update_count == 0
+
+    - name: Handle search errors
+      debug:
+        msg: "Error occurred while searching for updates: {{ update_result.msg | default('Unknown error') }}"
+      when: 
+        - update_result is defined
+        - update_result.failed is defined
+        - update_result.failed

@@ -5,7 +5,7 @@
   - name: Create users "ansible" on remote hosts
     ansible.builtin.user:
       name: ansible
-      password: password
+      password: H84zzoMc
       append: yes
       groups: sudo
       shell: /bin/bash

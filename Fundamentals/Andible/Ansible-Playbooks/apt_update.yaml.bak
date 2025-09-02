@@ -1,0 +1,12 @@
+---
+- hosts: Syndicate
+  become: true
+  tasks:
+  - name: Update, Upgrade, Autoremove, Autoclean
+    ansible.builtin.apt:
+      update_cache: yes
+      upgrade: full
+      autoremove: yes
+      clean: yes
+      autoclean: yes
+      force_apt_get: no

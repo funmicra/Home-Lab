@@ -1,0 +1,184 @@
+---
+- hosts: Syndicate
+  become: true
+  gather_facts: true
+  vars:
+    reboot_required_file: "/var/run/reboot-required"
+    max_reboot_wait: 600
+    maintenance_log: "/var/log/ansible-maintenance.log"
+  
+  pre_tasks:
+    - name: Log maintenance start
+      lineinfile:
+        path: "{{ maintenance_log }}"
+        line: "{{ ansible_date_time.iso8601 }} - Maintenance started by {{ ansible_user_id }}"
+        create: yes
+      delegate_to: localhost
+      run_once: true
+
+  tasks:
+    - name: Check if system is accessible
+      ping:
+      register: ping_result
+
+    - name: Update apt package cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600  # Only update if cache is older than 1 hour
+      register: cache_update_result
+      retries: 3
+      delay: 10
+
+    - name: Check for available upgrades
+      shell: apt list --upgradable 2>/dev/null | grep -c upgradable || true
+      register: upgradable_packages
+      changed_when: false
+
+    - name: Display available upgrades count
+      debug:
+        msg: "{{ upgradable_packages.stdout }} packages available for upgrade"
+
+    - name: Upgrade packages
+      apt:
+        upgrade: yes
+        force_apt_get: yes
+      register: upgrade_result
+      when: upgradable_packages.stdout | int > 0
+      notify: handle_reboot_if_required
+
+    - name: Perform a dist-upgrade
+      apt:
+        upgrade: dist
+        force_apt_get: yes
+      register: dist_upgrade_result
+      when: upgradable_packages.stdout | int > 0
+      notify: handle_reboot_if_required
+
+    - name: Remove unused packages
+      apt:
+        autoremove: yes
+        purge: yes
+      register: autoremove_result
+
+    - name: Clean up downloaded archives
+      apt:
+        autoclean: yes
+      register: autoclean_result
+
+    - name: Check disk space after cleanup
+      shell: df -h / | tail -1 | awk '{print $4}'
+      register: disk_space_available
+      changed_when: false
+
+    - name: Collect maintenance summary data
+      set_fact:
+        maintenance_summary:
+          host: "{{ inventory_hostname }}"
+          cache_updated: "{{ 'Yes' if cache_update_result.changed else 'No' }}"
+          packages_upgraded: "{{ 'Yes' if upgrade_result.changed | default(false) else 'No' }}"
+          dist_upgrade: "{{ 'Yes' if dist_upgrade_result.changed | default(false) else 'No' }}"
+          packages_removed: "{{ 'Yes' if autoremove_result.changed else 'No' }}"
+          disk_space: "{{ disk_space_available.stdout }}"
+          upgradable_count: "{{ upgradable_packages.stdout }}"
+
+    - name: Add to global summary list
+      set_fact:
+        all_summaries: "{{ hostvars['localhost']['all_summaries'] | default([]) + [maintenance_summary] }}"
+      delegate_to: localhost
+      delegate_facts: true
+
+    - name: Check for security updates
+      shell: apt list --upgradable 2>/dev/null | grep -i security | wc -l
+      register: security_updates
+      changed_when: false
+
+    - name: Warn about pending security updates
+      debug:
+        msg: "WARNING: {{ security_updates.stdout }} security updates still pending!"
+      when: security_updates.stdout | int > 0
+
+  handlers:
+    - name: handle_reboot_if_required
+      block:
+        - name: Check if reboot is required
+          stat:
+            path: "{{ reboot_required_file }}"
+          register: reboot_required
+
+        - name: Notify about reboot requirement
+          debug:
+            msg: "System reboot is required to complete updates"
+          when: reboot_required.stat.exists
+        
+        - name: Reboot the system
+          reboot:
+            reboot_timeout: "{{ max_reboot_wait }}"
+            msg: "Rebooting for system updates"
+          when: reboot_required.stat.exists
+
+        - name: Wait for system to come back online
+          wait_for_connection:
+            timeout: "{{ max_reboot_wait }}"
+          when: reboot_required.stat.exists
+
+  post_tasks:
+    - name: Display disk space summary
+      debug:
+        msg: |
+          
+          =======================================
+                   DISK SPACE SUMMARY
+          =======================================
+          {%- for host in groups['Syndicate'] %}
+          {%- set summary = hostvars[host]['maintenance_summary'] | default({}) %}
+          {{ "%-20s: %s" | format(host, summary.disk_space | default('N/A')) }}
+          {%- endfor %}
+          =======================================
+      delegate_to: localhost
+      run_once: true
+
+    - name: Verify system is healthy after maintenance
+      block:
+        - name: Check system load
+          shell: uptime | awk -F'load average:' '{print $2}'
+          register: system_load
+          changed_when: false
+
+        - name: Check SSH service
+          service:
+            name: ssh
+            state: started
+          ignore_errors: yes
+          register: ssh_check
+
+        - name: Check DNS resolution service (if exists)
+          service:
+            name: systemd-resolved
+            state: started
+          ignore_errors: yes
+          register: dns_check
+          failed_when: false  # Don't fail if service doesn't exist
+
+        - name: Report service status
+          debug:
+            msg: |
+              Service Health Check:
+              - SSH: {{ 'OK' if ssh_check.state is defined and ssh_check.state == 'started' else 'FAILED' }}
+              - DNS Resolution: {{ 'OK' if dns_check.state is defined and dns_check.state == 'started' else 'Not Available/Failed' }}
+
+        - name: Log maintenance completion
+          lineinfile:
+            path: "{{ maintenance_log }}"
+            line: "{{ ansible_date_time.iso8601 }} - Maintenance completed successfully on {{ inventory_hostname }}"
+          delegate_to: localhost
+
+      rescue:
+        - name: Log maintenance failure
+          lineinfile:
+            path: "{{ maintenance_log }}"
+            line: "{{ ansible_date_time.iso8601 }} - Maintenance FAILED on {{ inventory_hostname }}"
+          delegate_to: localhost
+
+        - name: Fail the playbook
+          fail:
+            msg: "Post-maintenance health checks failed"
