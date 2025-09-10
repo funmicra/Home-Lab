@@ -75,7 +75,7 @@ systemctl status zerotier-one
 sudo systemctl restart zerotier-one
 ```
 # Node joined but not authorized
-- Log into my.zerotier.com [https://my.zerotier.com] --> (or your controller).
+- Log into [my.zerotier.com](https://my.zerotier.com) --> (or your controller).
 - Approve the node’s ID under the network settings.
 
 # Node has no IP assigned
