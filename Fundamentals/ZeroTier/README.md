@@ -39,6 +39,6 @@ docker run --device=/dev/net/tun --net=host --cap-add=NET_ADMIN \
 
 ### 📚 Documentation & Resources
 
-- ZeroTier Official Docs [https://docs.zerotier.com/]
-- ZeroTier GitHub
-- Community Forum
+- [ZeroTier Official Docs](https://docs.zerotier.com/)
+- [ZeroTier GitHub](https://github.com/zerotier/ZeroTierOne)
+- [Community Forum](https://discuss.zerotier.com/)
