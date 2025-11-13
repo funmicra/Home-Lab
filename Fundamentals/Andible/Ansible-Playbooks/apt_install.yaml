@@ -1,9 +1,0 @@
----
-- hosts: Syndicate
-  become: true
-  tasks:
-  - name: Install Package
-    ansible.builtin.apt:
-      update_cache: yes
-      name: htop
-      state: present
