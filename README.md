@@ -93,7 +93,6 @@ I built it on July 2018 and still improving it..
 |----------------|------------------------------------|--------------------------------------------|
 | **[Nextcloud](https://black-crab.cc/)**  | Self-hosted cloud storage for me and my family members |  Runs Public with custom cloudflare domain  |
 | **Portainer**  | GUI Docker container management    | Runs localy  |
-| **Watchtower** | Auto-update containers             |  Runs localy  |
 | **Heimdall**   | Dashboard for accessing services   |  Runs localy  |
 | **Vaultwarden**   | Self-Hosted password manager solution   |  Runs Public with custom cloudflare domain  |
 | **YoutubeDL**  | Application for downloading from YouTube   |  Runs localy  |
@@ -103,45 +102,6 @@ I built it on July 2018 and still improving it..
 
 ---
 
-## ⚙️ Automation & Configuration Management
 
-- **Ansible:**
-  - [Docker deployment and container management](https://github.com/funmicra/Home-Lab/tree/master/Fundamentals/Docker/My%20Docker%20Stacks)
-  - [Playbooks](https://github.com/funmicra/Home-Lab/tree/master/Fundamentals/Andible/Ansible-Playbooks) for updating, upgrading, provisioning, user creation, and system configuration
-  
-
---- 
-
-## 📊 Monitoring & Maintenance
-
-- **CAPsMAN** – centralized AP management with signal tuning
-- **Watchtower** – automatic Docker container updates
-- **OMV** – NAS monitoring and disk health
-- **Uptime Kuma** – for monitoring my servises 
-
----
-
-## 🧠 Skills Practiced
-
-| Category             | Technologies & Tools                               |
-|----------------------|----------------------------------------------------|
-| **DevOps**           | Proxmox, Docker, Ansible, Linux cli, Scripting               |
-| **Networking**       | MikroTik (RouterOS), VLANs, CAPsMAN, ZeroTier      |
-| **System Admin**     | Debian/Ubuntu, Windows, LXC, remote access (SSH)   |
-| **Automation**       | Ansible (YAML), cron jobs, backup scripting        |
-| **Security**         | DNS filtering (AdGuard), VLAN isolation, Kali Linux |
-
----
-
-## 📌 Future Improvements
-
-- 🔄 Clone and migrate this infrastructure from self-hosted on AWS for clustering and higher availability  
-- 📊 Centralized logging with Prometheus + Grafana  
-- 🧪 CI/CD pipelines for infra updates with Jenkins and Git Actions
-- 🧵 GitOps-style Ansible repo with inventory separation  
-- 🛡️ Implement full backup strategy with ProxMox Backup Server (2nd Device) 
-- 🔐 Add 2FA and secrets management (Vault or SOPS)
-
----
 
 
