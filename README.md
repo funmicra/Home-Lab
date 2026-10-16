@@ -1,107 +1,127 @@
 # My DevOps Home-Lab / Syndicate
-Home lab Documentation
+
+Documentation for my two-site home lab. I use it to practise DevOps and systems engineering on real infrastructure that my family and I rely on every day.
+
 ## ✍️ About Me
 
-I'm passionate about learning DevOps and systems engineering through real-world experimentation. This home lab has been instrumental in building my skills and confidence, and I’m always evolving it as I explore new technologies.
+I learn by building and running things. The lab started in July 2018 and I keep reworking it as I learn new tools.
 
-If you’d like to connect or collaborate, feel free to reach out! 
-[e-mail](el.funmicra@gmail.com)
-
----
-# 🧪 The Lab
-
-Welcome to my home lab project! This lab simulates real-world infrastructure for hands-on learning and experimentation in DevOps, system administration, networking, and automation.
+Want to connect or collaborate? [Email me](mailto:el.funmicra@gmail.com).
 
 ---
 
-I built it on July 2018 and still improving it..
----
 # 🖧 Network Topology
+
 ![Home-Lab](https://github.com/user-attachments/assets/130d23e8-c96b-4f12-b8f6-2563699e8ad3)
 
+| Site | Name | Subnet | Role |
+|---|---|---|---|
+| A | **Syndicate** | `192.168.88.0/25` | Primary: home lab and household |
+| B | **Cafe-Exohi** | `192.168.88.128/25` | Secondary: small family café |
+
+The two sites are joined by a **ZeroTier** site-to-site VPN. The Syndicate router runs the ZeroTier controller. Remote access uses SSH over the VPN, with MikroTik Back-to-Home WireGuard as a fallback.
+
 ---
 
-## 🏠 Site A (Home Lab)
+## 🏠 Syndicate
 
 ### 🛠️ Hardware
 ![6U Wall-mounted rack](https://github.com/user-attachments/assets/3c3fb64c-a953-4f3e-bf42-8e76f6c3abe4)
-- **6U Wall-mounted rack with:**
-- **24-port patch panel**
-- **TP-Link 24-port switch (unmanaged)**
-- **MikroTik RB4011:** as core router and LANs isolator with Fireewall filters
-- **TP-LINK TL-MR6400:** as failover modem solution for zero down time
-- **5 Wi-Fi access points:** managed via **CAPsMAN** (MikroTik)
-- **PiKVM::** for remote troubleshooting my ProxMox server
-- **CCTV with 5 cameras:** for home security
-- **Dell mini PC:** running **Proxmox VE**
 
-### 🌐 Network Architecture
-- **Subnet:** `192.168.88.0/25`
-- **VLANs:**
-  - `Guest` – limited internet-only access
-  - `Smart Devices` – isolated IoT environment
-  - `Admin` – full-access trusted LAN
-  - `Repairments` – Isolated LAN for devices that i repair
-- **DNS Filtering:** [AdGuard Home](https://github.com/AdguardTeam/AdGuardHome) (LXC container)
+- **6U wall-mounted rack** with a 24-port patch panel and an unmanaged 24-port switch
+- **MikroTik RB4011:** core router, firewall, and CAPsMAN controller. WAN is VDSL (PPPoE) with LTE failover.
+- **5 MikroTik access points** managed through CAPsMAN
+- **Dell OptiPlex:** runs Proxmox VE
+- **PiKVM:** out-of-band access to the Proxmox host
+- **Workstation (Debian 13):** daily driver, with a local libvirt/KVM test lab
+- **CCTV:** 5 cameras on an NVR
 
-### 💻 Virtualization with Proxmox
-<img width="1918" height="880" alt="Screenshot from 2025-08-30 15-45-14" src="https://github.com/user-attachments/assets/a7840bcf-89d6-4d06-8d3e-015ea9d8f23a" />
+### 🌐 Networks
+- **Private LAN:** trusted devices and servers
+- **Guest:** internet-only
+- **IoT:** isolated smart devices
+- **DNS:** the router resolves the internal `*.syndicate` domain itself. AdGuard Home used to do this, and I retired it.
 
-| VM / Container | Role                                  | OS             |
-|----------------|----------------------------------------|----------------|
-| `debian-docker Production Server` | Docker host (Nextcloud, Portainer, Heimdall, Watchtower) | Debian         |
-| `debian-docker Testing Server` | Docker host (Testing various applications and microservises before they migrate to production server) | Debian         |
-| `openmediavault` | NAS with SMB and NFS shares and scheduled backups | OMV            |
-| `kali-vm`       | Pentesting and security experiments   | Kali Linux     |
-| `windows10-vm`  | Testing & Windows-based services      | Windows 10     |
-| `adguard-lxc`   | Local DNS filtering                   | LXC (Debian)   |
+### 💻 Virtualization (Proxmox)
 
----
+| VM | Role |
+|---|---|
+| **Cronus** | Docker host: reverse proxy, dashboards, SSO, n8n automation, Portainer |
+| **Nextcloud** | Self-hosted cloud storage for family |
+| **Portfolio** | Dockerized WordPress portfolio |
+| **Olympus** | NAS (SMB and NFS) plus Docker |
+| **Vault** | HashiCorp Vault for secrets and PKI |
+| **Zabbix-Server** | Zabbix with a PostgreSQL backend |
+| **Print server** | CUPS, Avahi and IPP-USB for a USB laser printer |
 
-## 🏢 Site B (Remote/Work)
+### 🔐 Services
 
-### 🛠️ Hardware
-- **Router:** MikroTik hAP ax²
-- **Three Mikrotik Access Points:** For better customer experience and better devices roaming
-- **CCTV with 8 cameras:** for business security 
-- **Central Pc:** For playing music and other simple office jobs
-- **EFTPOS:** For contactless payments
-- **POS(Point of Sales):** Self hosted on a Raspberry pi 4 with barcode scanner and a tablet as a remote monitor for the sales - [odoo](https://www.odoo.com/app/point-of-sale-shop)
-- **Cashier Mashine**
+| Service | Purpose | Exposure |
+|---|---|---|
+| **nginx reverse proxy** | TLS termination for all `*.syndicate` services | Internal |
+| **Authentik** | SSO (OIDC and forward-auth) in front of Portainer, n8n and WordPress login | Public |
+| **Nextcloud** | Files, calendar and contacts | Public |
+| **Portfolio (WordPress)** | Project showcase | Public |
+| **n8n** | Automation (backups, fleet upgrades, chat-ops) | Public, behind SSO |
+| **Portainer** | Docker management | Internal |
+| **Home Assistant** | Smart-home hub | Internal |
+| **HashiCorp Vault** | Secrets, PKI and certificate issuance | Internal |
 
-### 🌐 Network Architecture
-- **Subnet:** `192.168.88.128/25`
-- **VLANs:** Guest, Devices, Admin
-- **Connected to Site A Admin network** via **Zerotier VPN**
+Public services are published through **Cloudflare Tunnel** on my own domain.
 
 ---
 
-## 🔄 Inter-Site Connectivity
+## 🏢 Cafe-Exohi
 
-- **Site-to-Site VPN:** [ZeroTier](https://www.zerotier.com/) for seamless L2 connectivity
-- **Remote Access:** SSH over VPN, WireGuard fallback
-- **Backups & Sync:** Local + remote sync planned (rsync cronjob + OMV cronjobs)
+A lighter footprint: a MikroTik hAP ax² gateway, 3 access points, an isolated POS network, and CCTV.
 
----
-
-## 🐳 Docker Services (on Debian VM)
-<img width="1918" height="880" alt="Screenshot from 2025-08-30 15-47-06" src="https://github.com/user-attachments/assets/6872ed22-f54c-400d-a02f-933b2f20a580" />
-<img width="1918" height="880" alt="Screenshot from 2025-08-30 15-47-27" src="https://github.com/user-attachments/assets/f57005ee-b527-4b6c-8387-66103fcee155" />
-<img width="1918" height="880" alt="Screenshot from 2025-08-30 15-47-42" src="https://github.com/user-attachments/assets/03a75ced-345f-4f6d-a3b8-55bf805b6d93" />
-
-|Service        | Purpose                            |             Local / Public                               |
-|----------------|------------------------------------|--------------------------------------------|
-| **[Nextcloud](https://black-crab.cc/)**  | Self-hosted cloud storage for me and my family members |  Runs Public with custom cloudflare domain  |
-| **Portainer**  | GUI Docker container management    | Runs localy  |
-| **Heimdall**   | Dashboard for accessing services   |  Runs localy  |
-| **Vaultwarden**   | Self-Hosted password manager solution   |  Runs Public with custom cloudflare domain  |
-| **YoutubeDL**  | Application for downloading from YouTube   |  Runs localy  |
-| **Uptime Kuma**  | Monitoring the servises and apps   |  Runs localy  |
-| **AgentDVR**  | Monitoring cctv cameras on both sites   |  Runs localy  |
-| **Clouflare**  | Container for secure tunneling my NextCloud and vaultwarden app with public Domains    |  Runs localy  |
+- **Private LAN:** office devices
+- **Guest:** client-isolated Wi-Fi
+- **POS network:** a separate subnet for the Raspberry Pi 4 running a self-hosted point-of-sale system
+- **Gateway:** hAP ax² with ZeroTier back to Syndicate, monitored over SNMP
 
 ---
 
+## ⚙️ Automation & CI/CD
 
+All infrastructure code lives in GitLab (`funmicra-group`), with pipelines running on a self-hosted runner.
 
+- **Ansible:** deploys bootstrap scripts, per-host config and cron jobs across the fleet
+- **GitLab CI:** app-stack deploys, system bootstrap, and a Vault PKI certificate pipeline that ends in an nginx reload
+- **Scripts:** idempotent Bash with `set -Euo pipefail`, dry-run flags for anything destructive, and shared libraries for secrets lookup and notifications
+- **Secrets:** scripts keep no secrets on disk. They resolve them at runtime from Cloudflare Workers KV (migrating to Vault), using a small per-script bootstrap file.
 
+---
+
+## 📈 Monitoring & Alerting
+
+- **Zabbix:** host, service and SNMP monitoring. Alerts are routed by host group and severity.
+- **Grafana Cloud:** Grafana Alloy ships logs and metrics from every host. I use it for dashboards and log search.
+- **RabbitMQ:** one alerting broker that all scripts publish to. It fans out to per-category Discord channels, so no script holds a webhook URL.
+- **Discord:** the notification surface for alerts, backups, updates and cert renewals.
+
+---
+
+## 💾 Backups
+
+Backups cover Docker volumes and env files, Vault snapshots, RabbitMQ definitions, MikroTik configs, the Zabbix database and home directories. They go to several places:
+
+- NFS on the NAS
+- A USB drive on the NAS
+- Cloudflare R2
+- A Hetzner storage box
+
+Each job reports success or failure to Discord. I have proven a restore for some of them (RabbitMQ definitions so far) and still need to do it for the rest.
+
+---
+
+## 🧰 Stack at a glance
+
+`Proxmox` · `Debian` · `Docker` · `Ansible` · `GitLab CI` · `Bash` · `systemd` · `MikroTik RouterOS` · `ZeroTier` · `Cloudflare Tunnel / Workers KV / R2` · `HashiCorp Vault` · `Authentik` · `Zabbix` · `Grafana Cloud` · `RabbitMQ` · `n8n` · `Nextcloud`
+
+---
+
+## 📜 History
+
+- Previously self-hosted Jenkins, AdGuard Home, Uptime Kuma and a Loki/Promtail stack. They are now replaced by GitLab CI, router DNS, Zabbix and Grafana Cloud.
+- K3s, ArgoCD and Kargo run as a separate learning cluster, not part of production here.
