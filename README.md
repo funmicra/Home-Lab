@@ -12,7 +12,7 @@ Want to connect or collaborate? [Email me](mailto:el.funmicra@gmail.com).
 
 # 🖧 Network Topology
 
-![Home-Lab](https://github.com/user-attachments/assets/130d23e8-c96b-4f12-b8f6-2563699e8ad3)
+![Home-Lab topology](images/topology.png)
 
 | Site | Name | Subnet | Role |
 |---|---|---|---|
